@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Andrea Wijaya",
+    "title": "Culinary Explorer", 
+    "rating": 5,
+    "comment": "Rasanya luar biasa! Setiap hidangan seperti petualangan baru bagi lidah saya. Tekstur dan presentasinya sempurna!"
+  },
+  {
+    "id": 2,
+    "name": "Bryan Hartono",
+    "title": "Nutrition Specialist", 
+    "rating": 4,
+    "comment": "Sangat memuaskan! Menu sehat tanpa mengorbankan rasa. Bahan-bahan berkualitas tinggi dan pengolahan yang tepat."
+  },
+  {
+    "id": 3,
+    "name": "Clarissa Tanuwijaya",
+    "title": "Gourmet Lover",
+    "rating": 5,
+    "comment": "Pengalaman makan terbaik tahun ini! Pelayanan ramah, atmosfer menyenangkan, dan hidangan yang memukau."
+  },
+  {
+    "id": 4,
+    "name": "Davin Setiawan",
+    "title": "Food Connoisseur",
+    "rating": 3,
+    "comment": "Cukup baik, tapi ada ruang untuk peningkatan. Beberapa hidangan terlalu biasa dibandingkan harganya."
+  },
+  {
+    "id": 5,
+    "name": "Elisabeth Chandra",
+    "title": "Epicurean Enthusiast", 
+    "rating": 4,
+    "comment": "Pengalaman yang memorable! Kombinasi rasa yang inovatif dan penyajian yang artistik. Akan kembali lagi!"
+  }
+]

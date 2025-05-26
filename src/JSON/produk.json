@@ -1,0 +1,62 @@
+[
+  {
+    "kode_produk": "P01",
+    "nama_produk": "Rendang Padang",
+    "harga": 45000,
+    "stok": 12
+  },
+  {
+    "kode_produk": "P02",
+    "nama_produk": "Gudeg Jogja",
+    "harga": 30000,
+    "stok": 8
+  },
+  {
+    "kode_produk": "P03",
+    "nama_produk": "Pempek Palembang",
+    "harga": 25000,
+    "stok": 5
+  },
+  {
+    "kode_produk": "P04",
+    "nama_produk": "Sate Madura",
+    "harga": 28000,
+    "stok": 10
+  },
+  {
+    "kode_produk": "P05",
+    "nama_produk": "Papeda Papua",
+    "harga": 20000,
+    "stok": 4
+  },
+  {
+    "kode_produk": "P06",
+    "nama_produk": "Ayam Betutu Bali",
+    "harga": 42000,
+    "stok": 7
+  },
+  {
+    "kode_produk": "P07",
+    "nama_produk": "Soto Banjar",
+    "harga": 25000,
+    "stok": 6
+  },
+  {
+    "kode_produk": "P08",
+    "nama_produk": "Tinutuan Manado",
+    "harga": 22000,
+    "stok": 3
+  },
+  {
+    "kode_produk": "P09",
+    "nama_produk": "Nasi Liwet Solo",
+    "harga": 27000,
+    "stok": 9
+  },
+  {
+    "kode_produk": "P10",
+    "nama_produk": "Lontong Balap Surabaya",
+    "harga": 23000,
+    "stok": 0
+  }
+]
