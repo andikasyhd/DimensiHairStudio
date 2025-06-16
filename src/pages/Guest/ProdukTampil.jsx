@@ -29,10 +29,10 @@ export default function ProdukTampil() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-red-600 mb-2 flex items-center justify-center gap-2">
-            <FaFireAlt /> Menu Spesial Sedap
+            <FaFireAlt /> Layanan Spesial Dimensi HairStudio
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Nikmati cita rasa autentik Indonesia dengan kualitas premium
+            Nikmati pengalaman pangkas rambut profesional dengan sentuhan gaya modern dan kualitas terbaik.
           </p>
         </div>
         

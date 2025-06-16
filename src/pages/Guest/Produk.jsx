@@ -11,7 +11,7 @@ export default function Produk() {
         <div className="text-center md:text-left mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Layanan <span className="text-emerald-400">Unggulan</span>
-          </h2>
+          </h2>Menu 
           <p className="text-gray-300 mt-2">
             Rangkaian layanan terbaik untuk tampilan rambut yang menawan di DimensiHairStudio.
           </p>

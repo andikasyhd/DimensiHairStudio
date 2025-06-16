@@ -16,7 +16,7 @@ export default function Herosection() {
         {/* Gambar kanan */}
         <div className="flex justify-center md:justify-end">
           <img
-            src="/img/makanan.jpg" // Ganti dengan gambar salon jika tersedia
+            src="/img/makanan.jpg" 
             alt="DimensiHairStudio Interior"
             className="w-full max-w-md rounded-xl shadow-2xl object-cover border border-gray-700"
             loading="lazy"
