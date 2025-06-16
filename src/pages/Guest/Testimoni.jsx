@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// Make sure this path is correct for your project structure.
-import reviewsData from '../../JSON/testimoni.json'; 
+import reviewsData from '../../JSON/testimoni.json';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export default function Testimoni() {
@@ -22,7 +21,7 @@ export default function Testimoni() {
   if (!reviews || reviews.length === 0) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-gray-500">No testimonials available.</p>
+        <p className="text-gray-500">Testimoni tidak tersedia.</p>
       </div>
     );
   }
@@ -30,39 +29,43 @@ export default function Testimoni() {
   const currentReview = reviews[currentIndex];
 
   return (
-    <div className="relative py-12 md:py-16 bg-white">
-      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
-    Apa Kata Mereka?
-  </h2>
-        <div className="bg-white rounded-2xl shadow-xl flex flex-col md:flex-row overflow-hidden min-h-[350px] md:min-h-[380px]">
+    <div className="relative py-16 md:py-20 bg-black text-white font-serif">
+      <div className="relative max-w-4xl mx-auto px-6 sm:px-8 lg:px-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-yellow-400 mb-10">
+          Apa Kata Mereka?
+        </h2>
+
+        <div className="bg-gray-900 rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden min-h-[350px] md:min-h-[380px]">
           {/* Image Section */}
-          <div className="w-full md:w-[280px] lg:w-[320px] flex-none bg-gray-200">
+          <div className="w-full md:w-[300px] lg:w-[350px] flex-none">
             <img
-              src={currentReview.image_url || 'https://via.placeholder.com/300x400?text=No+Image'} // Fallback image
+              src={currentReview.image_url || 'https://via.placeholder.com/300x400?text=No+Image'}
               alt={currentReview.name}
               className="w-full h-64 md:h-full object-cover"
-              onError={(e) => { e.target.onerror = null; e.target.src="https://via.placeholder.com/300x400?text=Image+Error"; }} // Handle broken image links
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://via.placeholder.com/300x400?text=Image+Error';
+              }}
             />
           </div>
 
           {/* Text Content Section */}
-          <div className="flex-grow p-6 pt-8 md:p-8 flex flex-col justify-center">
+          <div className="flex-grow p-6 md:p-10 flex flex-col justify-center">
             <div className="relative">
-              <span 
-                className="absolute -top-4 md:-top-5 -left-2 md:-left-3 text-5xl md:text-7xl text-hijau font-serif opacity-80" 
+              <span
+                className="absolute -top-6 -left-4 text-6xl md:text-7xl text-yellow-400 opacity-80"
                 style={{ lineHeight: '0.8' }}
                 aria-hidden="true"
               >
                 “
               </span>
-              <p className="text-gray-600 italic text-base md:text-lg leading-relaxed ml-6 md:ml-8">
-                {currentReview.comment} {/* Changed from quote to comment */}
+              <p className="text-gray-300 italic text-base md:text-lg leading-relaxed ml-6 md:ml-10">
+                {currentReview.comment}
               </p>
             </div>
             <div className="mt-6 md:mt-8 text-left">
-              <h4 className="font-bold text-xl md:text-2xl text-gray-800">{currentReview.name}</h4>
-              <p className="text-sm md:text-base text-gray-500">{currentReview.title || "Reviewer"}</p> {/* Added fallback for title */}
+              <h4 className="font-bold text-xl md:text-2xl text-white">{currentReview.name}</h4>
+              <p className="text-sm md:text-base text-yellow-400">{currentReview.title || "Reviewer"}</p>
             </div>
           </div>
         </div>
@@ -70,22 +73,18 @@ export default function Testimoni() {
         {/* Navigation Buttons */}
         <button
           onClick={handlePrev}
-          className="absolute top-1/2 -translate-y-1/2 
-                     left-[-12px] sm:left-[-18px] md:left-[-24px] 
-                     z-10 bg-white rounded-full p-2.5 md:p-3 shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-150 ease-in-out"
+          className="absolute top-1/2 -translate-y-1/2 left-[-16px] z-10 bg-gray-800 hover:bg-yellow-400 hover:text-black text-white rounded-full p-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
           aria-label="Previous testimonial"
         >
-          <FaChevronLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+          <FaChevronLeft className="w-5 h-5" />
         </button>
 
         <button
           onClick={handleNext}
-          className="absolute top-1/2 -translate-y-1/2 
-                     right-[-12px] sm:right-[-18px] md:right-[-24px] 
-                     z-10 bg-white rounded-full p-2.5 md:p-3 shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-150 ease-in-out"
+          className="absolute top-1/2 -translate-y-1/2 right-[-16px] z-10 bg-gray-800 hover:bg-yellow-400 hover:text-black text-white rounded-full p-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
           aria-label="Next testimonial"
         >
-          <FaChevronRight className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+          <FaChevronRight className="w-5 h-5" />
         </button>
       </div>
     </div>

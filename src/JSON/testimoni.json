@@ -1,37 +1,37 @@
 [
   {
     "id": 1,
-    "name": "Andrea Wijaya",
-    "title": "Culinary Explorer", 
+    "name": "Andika Pratama",
+    "title": "Pekerja Kreatif",
     "rating": 5,
-    "comment": "Rasanya luar biasa! Setiap hidangan seperti petualangan baru bagi lidah saya. Tekstur dan presentasinya sempurna!"
+    "comment": "Pelayanannya luar biasa! Potongannya sangat presisi dan hasil akhirnya benar-benar bikin tampil percaya diri."
   },
   {
     "id": 2,
-    "name": "Bryan Hartono",
-    "title": "Nutrition Specialist", 
+    "name": "Rizky Maulana",
+    "title": "Konsultan Gaya Hidup",
     "rating": 4,
-    "comment": "Sangat memuaskan! Menu sehat tanpa mengorbankan rasa. Bahan-bahan berkualitas tinggi dan pengolahan yang tepat."
+    "comment": "Nyaman dan cepat! Potongan rambut saya terlihat lebih segar dan rapi. Cocok untuk profesional muda."
   },
   {
     "id": 3,
-    "name": "Clarissa Tanuwijaya",
-    "title": "Gourmet Lover",
+    "name": "Fajar Nugroho",
+    "title": "Pegiat Fashion",
     "rating": 5,
-    "comment": "Pengalaman makan terbaik tahun ini! Pelayanan ramah, atmosfer menyenangkan, dan hidangan yang memukau."
+    "comment": "Barbershop terbaik yang pernah saya coba. Hasil cukur sangat stylish dan penata rambutnya komunikatif!"
   },
   {
     "id": 4,
-    "name": "Davin Setiawan",
-    "title": "Food Connoisseur",
+    "name": "Bagas Santoso",
+    "title": "Pengamat Tren Rambut",
     "rating": 3,
-    "comment": "Cukup baik, tapi ada ruang untuk peningkatan. Beberapa hidangan terlalu biasa dibandingkan harganya."
+    "comment": "Cukup memuaskan, walau masih ada ruang perbaikan. Beberapa detail bisa lebih diperhatikan."
   },
   {
     "id": 5,
-    "name": "Elisabeth Chandra",
-    "title": "Epicurean Enthusiast", 
+    "name": "Ilham Setiadi",
+    "title": "Karyawan Kantoran",
     "rating": 4,
-    "comment": "Pengalaman yang memorable! Kombinasi rasa yang inovatif dan penyajian yang artistik. Akan kembali lagi!"
+    "comment": "Tempat yang nyaman dan hasil pangkas sesuai ekspektasi. Pasti akan kembali untuk treatment berikutnya!"
   }
 ]

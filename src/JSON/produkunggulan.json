@@ -1,28 +1,26 @@
 [
   {
     "id": 1,
-    "nama": "Sate Kambing",
-    "harga": "35000",
+    "nama": "Haircut Modern",
+    "harga": "50000",
     "gambar": "/img/sate.jpg"
-    
   },
   {
     "id": 2,
-    "nama": "Soto Betawi",
-    "harga": "25000",
+    "nama": "Cukur Kumis & Jenggot",
+    "harga": "30000",
     "gambar": "/img/sobet.jpg"
   },
-
   {
     "id": 3,
-    "nama": "Soto Medan",
-    "harga": "25000",
+    "nama": "Hair Spa & Cuci Rambut",
+    "harga": "45000",
     "gambar": "/img/soto.jpg"
   },
   {
     "id": 4,
-    "nama": "Mie Aceh Kepiting",
-    "harga": "50000",
+    "nama": "Fade & Styling Premium",
+    "harga": "60000",
     "gambar": "/img/miaceh.jpg"
   }
 ]

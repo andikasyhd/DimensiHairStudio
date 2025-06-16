@@ -1,19 +1,15 @@
 export default function LogoGuest() {
-    return (
-       
-            
-      <div id="sidebar-logo" className="flex flex-col">
-        <span
-          id="logo-title"
-          className="font-poppins-extrabold text-[48px] text-gray-900"
-        >
-          Sedap{" "}
-          <b id="logo-dot" className="text-hijau">
-            .
-          </b>
-        </span>
-       
-      </div>
-        
-    )
+  return (
+    <div id="sidebar-logo" className="flex flex-col">
+      <span
+        id="logo-title"
+        className="font-serif text-[48px] text-white drop-shadow-lg"
+      >
+        DimensiHairStudio
+        <b id="logo-dot" className="text-yellow-400">
+          .
+        </b>
+      </span>
+    </div>
+  );
 }
