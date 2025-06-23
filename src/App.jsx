@@ -24,30 +24,30 @@ import ProdukTampil from  "./pages/Guest/ProdukTampil"
 
 // Lazy load the Dashboard component
 
-const Dashboard = React.lazy(() => import("./pages/Dashboard"));
-const Orders = React.lazy(() => import("./pages/Orders"));
-const Customers = React.lazy(() => import("./pages/Customers"));
+// const Dashboard = React.lazy(() => import("./pages/Dashboard"));
+// const Orders = React.lazy(() => import("./pages/Orders"));
+// const Customers = React.lazy(() => import("./pages/Customers"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
-const Error400 = React.lazy(() => import("./pages/Error400"));
-const Error401 = React.lazy(() => import("./pages/Error401"));
-const Error403 = React.lazy(() => import("./pages/Error403"));
-const FormAddCustomer = React.lazy(() =>
-  import("./components/FormAddCustomer")
-);
-const FormAddOrder = React.lazy(() => import("./components/FormAddOrder"));
-const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
-const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"));
-const Login = React.lazy(() => import("./pages/auth/Login"));
-const Register = React.lazy(() => import("./pages/auth/Register"));
-const Forgot = React.lazy(() => import("./pages/auth/Forgot"));
+// const Error400 = React.lazy(() => import("./pages/Error400"));
+// const Error401 = React.lazy(() => import("./pages/Error401"));
+// const Error403 = React.lazy(() => import("./pages/Error403"));
+// const FormAddCustomer = React.lazy(() =>
+//   import("./components/FormAddCustomer")
+// );
+// const FormAddOrder = React.lazy(() => import("./components/FormAddOrder"));
+// const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
+// const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"));
+// const Login = React.lazy(() => import("./pages/auth/Login"));
+// const Register = React.lazy(() => import("./pages/auth/Register"));
+// const Forgot = React.lazy(() => import("./pages/auth/Forgot"));
 const Loading = React.lazy(() => import("./components/Loading"));
-const Users = React.lazy(() => import("./pages/Users"));
+// const Users = React.lazy(() => import("./pages/Users"));
 
 function App() {
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
-        <Route element={<MainLayout />}>
+        {/* <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
@@ -62,7 +62,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<Forgot />} />
-        </Route>
+        </Route> */}
 
         <Route element={<GuestLayout />}>
           <Route path="/" element={<Homepage />} />
