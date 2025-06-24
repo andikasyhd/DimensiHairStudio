@@ -11,6 +11,7 @@ export default function ListPelanggan() {
     async function fetchData() {
       try {
         const data = await pemesananAPI.getAllPemesanan();
+        console.log(data); // Debug: periksa apakah `nama` tersedia
         setPemesanan(data);
         setFiltered(data);
       } catch (error) {
@@ -26,7 +27,7 @@ export default function ListPelanggan() {
 
     if (searchTerm) {
       hasilFilter = hasilFilter.filter(item =>
-        item.nama.toLowerCase().includes(searchTerm.toLowerCase())
+        item.nama && item.nama.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -46,36 +47,33 @@ export default function ListPelanggan() {
   };
 
   const buatPesanSetuju = (item) => {
-    const isi = `Halo ${item.nama}%0A` +
+    return `Halo ${item.nama}%0A` +
       `Terima kasih telah melakukan pemesanan layanan Pangkas.%0A` +
       `Pemesanan Anda telah diterima%0A` +
       `- Tanggal: ${item.tanggal}%0A` +
       `- Waktu: ${item.waktu}%0A%0A` +
       `Mohon datang tepat waktu sesuai jadwal.%0A%0A` +
       `Salam,%0ATim Layanan,%0ADimensi Hair Studio`;
-    return isi;
   };
 
   const buatPesanTolak = (item) => {
-    const isi = `Halo ${item.nama}%0A` +
-      `Mohon maaf, pemesanan layanan Pangkas%0A%0A Pada:%0A` +
-      `- tanggal: ${item.tanggal}%0A` +
-      `- Waktu: ${item.waktu}%0A` +
+    return `Halo ${item.nama}%0A` +
+      `Mohon maaf, pemesanan layanan Pangkas%0A%0A` +
+      `Pada:%0A- Tanggal: ${item.tanggal}%0A- Waktu: ${item.waktu}%0A` +
       `sudah penuh.%0ASilakan coba booking di waktu lain.%0A` +
-      `Terima kasih atas pengertiannya %0A%0A`+
+      `Terima kasih atas pengertiannya.%0A%0A` +
       `Salam,%0ATim Layanan,%0ADimensi Hair Studio`;
-    return isi;
   };
 
   return (
     <div className="p-8 text-black">
       <h1 className="text-2xl font-bold mb-4">Daftar Pemesanan Pelanggan</h1>
 
-      {/* Filter */}
+      {/* Filter Section */}
       <div className="flex flex-wrap gap-4 mb-4">
         <input
           type="text"
-          placeholder="Cari data"
+          placeholder="Cari nama pelanggan..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="border border-black rounded-full px-4 py-2 text-sm w-64 placeholder:text-gray-400"
@@ -91,7 +89,7 @@ export default function ListPelanggan() {
         </select>
       </div>
 
-      {/* Table */}
+      {/* Table Section */}
       <div className="overflow-x-auto rounded-lg shadow">
         <table className="w-full border border-gray-700 rounded-lg overflow-hidden">
           <thead className="bg-sky-600 text-white">
