@@ -35,3 +35,7 @@
 body {
     @apply font-muli;
 }
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+

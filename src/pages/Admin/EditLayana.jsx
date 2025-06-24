@@ -4,6 +4,8 @@ import { layananAPI } from "../../service/layananAPI";
 
 export default function EditLayanan() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nama: "",
     harga: "",
@@ -11,7 +13,7 @@ export default function EditLayanan() {
   });
 
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [success, setSuccess] = useState(false); // ✅ untuk alert sukses
 
   useEffect(() => {
     fetchLayanan();
@@ -54,7 +56,12 @@ export default function EditLayanan() {
     try {
       setLoading(true);
       await layananAPI.updateLayanan(id, formData);
-      navigate("/layanantampil");
+      setSuccess(true); // ✅ Tampilkan alert sukses
+
+      // Redirect setelah 1.5 detik
+      setTimeout(() => {
+        navigate("/layanantampil");
+      }, 1500);
     } catch (error) {
       console.error("Gagal mengupdate layanan:", error);
       alert("Terjadi kesalahan saat menyimpan perubahan.");
@@ -68,71 +75,81 @@ export default function EditLayanan() {
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">
-        Edit Layanan
-      </h1>
+    <div className="p-8 ml-16 min-h-screen bg-[#f9fafb]">
+      <h1 className="text-3xl font-semibold text-gray-800 mb-8">Edit Layanan</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Nama */}
-        <div>
-          <label className="block mb-1 font-medium text-sm">Nama Layanan</label>
-          <input
-            type="text"
-            name="nama"
-            value={formData.nama}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-xl text-sm"
-            placeholder="Masukkan nama layanan"
-          />
-        </div>
+      <div className="bg-white p-8 rounded-xl shadow-md max-w-2xl">
 
-        {/* Harga */}
-        <div>
-          <label className="block mb-1 font-medium text-sm">Harga</label>
-          <input
-            type="text"
-            name="harga"
-            value={formData.harga}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-xl text-sm"
-            placeholder="Contoh: 45000"
-          />
-        </div>
+        {/* ✅ ALERT SUCCESS */}
+        {success && (
+          <div className="alert alert-info mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="h-6 w-6 shrink-0 stroke-current">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Data layanan berhasil diperbarui!</span>
+          </div>
+        )}
 
-        {/* Deskripsi */}
-        <div>
-          <label className="block mb-1 font-medium text-sm">Deskripsi</label>
-          <textarea
-            name="deskripsi"
-            rows="4"
-            value={formData.deskripsi}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-xl text-sm"
-            placeholder="Tuliskan deskripsi layanan"
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Nama Layanan */}
+          <div>
+            <label className="block font-semibold text-gray-700 mb-1">Nama Layanan</label>
+            <input
+              type="text"
+              name="nama"
+              value={formData.nama}
+              onChange={handleChange}
+              className="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Contoh: Potong Rambut"
+            />
+          </div>
 
-        {/* Tombol Aksi */}
-        <div className="flex justify-between">
-          <button
-            type="button"
-            onClick={handleCancel}
-            className="bg-gray-300 text-gray-800 px-6 py-2 rounded-xl text-sm hover:bg-gray-400"
-            disabled={loading}
-          >
-            Batal
-          </button>
+          {/* Harga */}
+          <div>
+            <label className="block font-semibold text-gray-700 mb-1">Harga</label>
+            <input
+              type="text"
+              name="harga"
+              value={formData.harga}
+              onChange={handleChange}
+              className="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Contoh: 25000"
+            />
+          </div>
 
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-xl text-sm hover:bg-blue-700 disabled:opacity-50"
-            disabled={loading}
-          >
-            {loading ? "Menyimpan..." : "Simpan Perubahan"}
-          </button>
-        </div>
-      </form>
+          {/* Deskripsi */}
+          <div>
+            <label className="block font-semibold text-gray-700 mb-1">Deskripsi</label>
+            <textarea
+              name="deskripsi"
+              rows="4"
+              value={formData.deskripsi}
+              onChange={handleChange}
+              className="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Deskripsikan layanan secara singkat..."
+            />
+          </div>
+
+          {/* Tombol */}
+          <div className="flex justify-end space-x-4 pt-2">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-6 py-2 text-blue-600 border border-blue-600 rounded-xl hover:bg-blue-50 text-sm"
+              disabled={loading}
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 text-sm disabled:opacity-50"
+              disabled={loading}
+            >
+              {loading ? "Menyimpan..." : "Simpan"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

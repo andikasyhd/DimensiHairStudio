@@ -10,6 +10,10 @@ export default function Layanan() {
   const [priceFilter, setPriceFilter] = useState("all");
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null); // ✅ Konfirmasi ID
+
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
@@ -28,21 +32,31 @@ export default function Layanan() {
       setLayanan(data);
     } catch (error) {
       console.error("Gagal memuat data layanan:", error);
+      setError("Gagal memuat data layanan.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm("Yakin ingin menghapus layanan ini?")) return;
+  const handleDeleteConfirmed = async () => {
+    if (!confirmDeleteId) return;
     try {
       setLoading(true);
-      await layananAPI.deleteLayanan(id);
+      await layananAPI.deleteLayanan(confirmDeleteId);
+      setSuccess("Layanan berhasil dihapus.");
+      setError("");
       await loadLayanan();
     } catch (err) {
       console.error("Gagal menghapus:", err);
+      setError("Gagal menghapus layanan.");
+      setSuccess("");
     } finally {
       setLoading(false);
+      setConfirmDeleteId(null);
+      setTimeout(() => {
+        setSuccess("");
+        setError("");
+      }, 2000);
     }
   };
 
@@ -71,6 +85,50 @@ export default function Layanan() {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Data Layanan</h1>
+
+      {/* ✅ Alert Error */}
+      {error && (
+        <div role="alert" className="alert alert-error mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            className="h-6 w-6 shrink-0 stroke-current">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+              d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>{error}</span>
+        </div>
+      )}
+
+      {/* ✅ Alert Success */}
+      {success && (
+        <div role="alert" className="alert alert-success mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            className="h-6 w-6 shrink-0 stroke-current">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>{success}</span>
+        </div>
+      )}
+
+      {/* ✅ Alert Konfirmasi Hapus */}
+      {confirmDeleteId && (
+        <div role="alert" className="alert alert-vertical sm:alert-horizontal mb-4 bg-yellow-100 text-black border border-yellow-400">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            className="stroke-info h-6 w-6 shrink-0">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>Apakah Anda yakin ingin menghapus layanan ini?</span>
+          <div className="flex gap-2">
+            <button className="btn btn-sm" onClick={() => setConfirmDeleteId(null)}>
+              Batal
+            </button>
+            <button className="btn btn-sm btn-error" onClick={handleDeleteConfirmed}>
+              Hapus
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Search + Filter + Tambah */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
@@ -143,7 +201,7 @@ export default function Layanan() {
                         <AiFillEdit size={18} />
                       </button>
                       <button
-                        onClick={() => handleDelete(item.id)}
+                        onClick={() => setConfirmDeleteId(item.id)}
                         className="text-red-600 hover:text-red-800"
                       >
                         <AiFillDelete size={18} />

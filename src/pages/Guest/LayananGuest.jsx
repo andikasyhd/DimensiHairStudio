@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { layananAPI } from "../../service/layananAPI";
 import { AiFillStar } from "react-icons/ai";
 
 export default function LayananGuest() {
   const [layanan, setLayanan] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLayanan = async () => {
@@ -20,6 +22,11 @@ export default function LayananGuest() {
 
     fetchLayanan();
   }, []);
+
+  // Fungsi untuk navigasi ke halaman form dan kirim data layanan
+  const handleBookingClick = (layananItem) => {
+    navigate("/form", { state: { layanan: layananItem } });
+  };
 
   return (
     <section className="bg-gradient-to-b from-gray-900 via-black to-black text-white py-20 px-6 md:px-20 font-serif">
@@ -39,37 +46,35 @@ export default function LayananGuest() {
                 key={item.id}
                 className="bg-gray-800 rounded-xl p-4 shadow-xl border border-gray-700 hover:shadow-2xl transition"
               >
-                {/* Gambar layanan */}
                 {item.gambar && (
                   <img
                     src={item.gambar}
                     alt={item.nama}
-                    className="w-full h-44 object-cover rounded-lg mb-4 border border-gray-700"
+                    className="w-full h-40 object-cover rounded-lg mb-3"
                   />
                 )}
 
-                {/* Nama layanan */}
                 <h2 className="text-xl font-semibold text-emerald-400 mb-1">
                   {item.nama}
                 </h2>
-
-                {/* Deskripsi */}
-                <p className="text-sm text-gray-300 mb-3">
-                  {item.deskripsi}
-                </p>
-
-                {/* Harga */}
+                <p className="text-sm text-gray-300 mb-3">{item.deskripsi}</p>
                 <p className="text-md font-medium text-white mb-2">
                   Rp {Number(item.harga).toLocaleString("id-ID")}
                 </p>
 
-                {/* Rating bintang dummy */}
-                <div className="flex items-center gap-1 text-yellow-400">
+                <div className="flex items-center gap-1 text-yellow-400 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <AiFillStar key={i} size={16} />
                   ))}
                   <span className="ml-2 text-sm text-gray-300">5.0</span>
                 </div>
+
+                <button
+                  onClick={() => handleBookingClick(item)}
+                  className="bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg w-full transition"
+                >
+                  Booking
+                </button>
               </div>
             ))}
           </div>

@@ -46,14 +46,43 @@ export default function TambahLayanan() {
           Tambah Layanan
         </h2>
 
+        {/* ✅ Alert Error */}
         {error && (
-          <div className="bg-red-100 text-red-600 p-4 rounded-xl mb-4">
-            {error}
+          <div role="alert" className="alert alert-error mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="h-6 w-6 shrink-0 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>{error}</span>
           </div>
         )}
+
+        {/* ✅ Alert Success */}
         {success && (
-          <div className="bg-green-100 text-green-700 p-4 rounded-xl mb-4">
-            {success}
+          <div role="alert" className="alert alert-success mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="h-6 w-6 shrink-0 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>{success}</span>
           </div>
         )}
 
@@ -109,7 +138,7 @@ export default function TambahLayanan() {
             />
           </div>
 
-          {/* Aksi */}
+          {/* Tombol Aksi */}
           <div className="flex justify-end gap-4">
             <button
               type="button"

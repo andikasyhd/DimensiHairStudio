@@ -1,13 +1,4 @@
-import React, { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import GuestLayout from "./layouts/GuestLayout";
-import AdminLayout from "./layouts/AdminLayout";
-import Cek from "./pages/Guest/Cek";
-import Homepage from "./pages/Guest/Homepage";
-import LayananTampil from  "./pages/Admin/LayananTampil"
-import TambahLayanan from "./pages/Admin/TambahLayanan";
-import EditLayanan from "./pages/Admin/EditLayana";
-import LayananGuest from "./pages/Guest/LayananGuest";
+
 // import Sidebar from "./layouts/Sidebar";
 // import Header from "./components/Header";
 // import Dashboard from "./pages/Dashboard";
@@ -31,52 +22,62 @@ import LayananGuest from "./pages/Guest/LayananGuest";
 // const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 // const Orders = React.lazy(() => import("./pages/Orders"));
 // const Customers = React.lazy(() => import("./pages/Customers"));
-const NotFound = React.lazy(() => import("./pages/NotFound"));
+
 // const Error400 = React.lazy(() => import("./pages/Error400"));
 // const Error401 = React.lazy(() => import("./pages/Error401"));
 // const Error403 = React.lazy(() => import("./pages/Error403"));
 // const FormAddCustomer = React.lazy(() =>
 //   import("./components/FormAddCustomer")
 // );
+// const Users = React.lazy(() => import("./pages/Users"));
 // const FormAddOrder = React.lazy(() => import("./components/FormAddOrder"));
 // const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
-// const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"));
-// const Login = React.lazy(() => import("./pages/auth/Login"));
-// const Register = React.lazy(() => import("./pages/auth/Register"));
-// const Forgot = React.lazy(() => import("./pages/auth/Forgot"));
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import GuestLayout from "./layouts/GuestLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import Cek from "./pages/Guest/Cek";
+import FormPemesanan from "./pages/Guest/FormPemesanan";
+// import Homepage from "./pages/Guest/Homepage";
+// import LayananGuest from "./pages/Guest/LayananGuest";
+
+
+
+const Homepage = React.lazy(() => import("./pages/Guest/Homepage"));
+const LayananGuest = React.lazy(() => import("./pages/Guest/LayananGuest"));
+const LayananTampil = React.lazy(() => import("./pages/Admin/LayananTampil"));
+const TambahLayanan = React.lazy(() => import("./pages/Admin/TambahLayanan"));
+const EditLayanan = React.lazy(() => import("./pages/Admin/EditLayana"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"));
+const Login = React.lazy(() => import("./pages/auth/Admin/Login"));
+const Register = React.lazy(() => import("./pages/auth/Admin/Register"));
 const Loading = React.lazy(() => import("./components/Loading"));
-// const Users = React.lazy(() => import("./pages/Users"));
+const ListPelanggan = React.lazy(() => import("./pages/Admin/ListPelanggan"));
 
 function App() {
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
-        {/* <Route element={<MainLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/error400" element={<Error400 />} />
-          <Route path="/error401" element={<Error401 />} />
-          <Route path="/error403" element={<Error403 />} />
-          <Route path="/addcust" element={<FormAddCustomer />} />
-          <Route path="/addorders" element={<FormAddOrder />} />
-        </Route>
+        
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/forgot" element={<Forgot />} />
-        </Route> */}
+        </Route>
 
         <Route element={<GuestLayout />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/cek" element={<Cek />} />
           <Route path="/layanan" element={<LayananGuest/>} />
+          <Route path="/form" element={<FormPemesanan/>} />
         </Route>
 
         <Route element={<AdminLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/layanantampil" element={<LayananTampil/>} /> 
           <Route path="/tambahlayanan" element={<TambahLayanan/>} />
+          <Route path="/listpelanggan" element={<ListPelanggan/>} />
           <Route path="/edit/:id" element={<EditLayanan/>} />  
         </Route>
 
