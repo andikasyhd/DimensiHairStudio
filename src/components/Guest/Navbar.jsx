@@ -37,6 +37,19 @@ export default function Navbar() {
             }`
           }
         >
+          Layanan12
+        </NavLink>
+
+        <NavLink
+          to="/layanan"
+          className={({ isActive }) =>
+            `relative hover:text-yellow-500 font-serif ${
+              isActive
+                ? "font-bold after:absolute after:bottom-[-8px] after:left-0 after:w-full after:h-[3px] after:bg-yellow-500"
+                : ""
+            }`
+          }
+        >
           Layanan
         </NavLink>
 

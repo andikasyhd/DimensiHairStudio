@@ -3,7 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import GuestLayout from "./layouts/GuestLayout";
 import Cek from "./pages/Guest/Cek";
 import Homepage from "./pages/Guest/Homepage";
-import ProdukTampil from  "./pages/Guest/ProdukTampil"
+import LayananTampil from  "./pages/Guest/LayananTampil"
+import TambahLayanan from "./pages/Guest/TambahLayanan";
+import EditLayanan from "./pages/Guest/EditLayana";
+import LayananGuest from "./pages/Guest/LayananGuest";
 // import Sidebar from "./layouts/Sidebar";
 // import Header from "./components/Header";
 // import Dashboard from "./pages/Dashboard";
@@ -67,7 +70,10 @@ function App() {
         <Route element={<GuestLayout />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/cek" element={<Cek />} />
-          <Route path="/produktampil" element={<ProdukTampil/>} />
+          <Route path="/produktampil" element={<LayananTampil/>} />
+          <Route path="/tambahlayanan" element={<TambahLayanan/>} />
+          <Route path="/edit/:id" element={<EditLayanan/>} />
+          <Route path="/layanan" element={<LayananGuest/>} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -1,5 +1,4 @@
 import ErrorPage from "../components/ErrorPage";
-import Footer from "../components/Footer";
 import FooterGuest from "../components/Guest/FooterGuest";
 import Navbar from "../components/Guest/Navbar";
 
