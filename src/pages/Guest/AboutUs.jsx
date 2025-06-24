@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function AboutUs() {
   return (
     <section className="py-16 px-4 md:px-16 bg-black font-serif">
@@ -24,9 +25,15 @@ export default function AboutUs() {
           <p className="text-gray-300 text-base md:text-lg mb-6">
             Di <strong>DimensiHairStudio</strong>, kami tidak hanya memotong rambut—kami menciptakan pengalaman. Dengan tim profesional, layanan personal, dan suasana eksklusif, kami siap membantu Anda tampil lebih percaya diri dan bergaya.
           </p>
-          <button className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors duration-300 shadow-md">
+          
+
+          <Link
+            to="/layanan"
+            className="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors duration-300 shadow-md"
+          >
             ✂️ Booking Sekarang
-          </button>
+          </Link>
+
         </div>
       </div>
     </section>

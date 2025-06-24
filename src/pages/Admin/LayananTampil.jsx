@@ -1,0 +1,205 @@
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { layananAPI } from "../../service/layananAPI";
+import LoadingSpinner from "../../components/LoadingSpinner";
+
+export default function Layanan() {
+  const [layanan, setLayanan] = useState([]);
+  const [search, setSearch] = useState("");
+  const [priceFilter, setPriceFilter] = useState("all");
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    loadLayanan();
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, priceFilter]);
+
+  const loadLayanan = async () => {
+    try {
+      setLoading(true);
+      const data = await layananAPI.fetchLayanan();
+      setLayanan(data);
+    } catch (error) {
+      console.error("Gagal memuat data layanan:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm("Yakin ingin menghapus layanan ini?")) return;
+    try {
+      setLoading(true);
+      await layananAPI.deleteLayanan(id);
+      await loadLayanan();
+    } catch (err) {
+      console.error("Gagal menghapus:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterByPrice = (item) => {
+    const harga = parseInt(item.harga);
+    switch (priceFilter) {
+      case "0-50000":
+        return harga >= 0 && harga <= 50000;
+      case "50000-100000":
+        return harga > 50000 && harga <= 100000;
+      case ">100000":
+        return harga > 100000;
+      default:
+        return true;
+    }
+  };
+
+  const filteredLayanan = layanan
+    .filter((item) => item.nama.toLowerCase().includes(search.toLowerCase()))
+    .filter(filterByPrice);
+
+  const totalPages = Math.ceil(filteredLayanan.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentItems = filteredLayanan.slice(startIndex, startIndex + itemsPerPage);
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">Data Layanan</h1>
+
+      {/* Search + Filter + Tambah */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div className="flex gap-2 items-center w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Cari data"
+            className="p-2 border rounded-xl w-full sm:w-64 text-sm"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select
+            className="p-2 border rounded-xl text-sm"
+            value={priceFilter}
+            onChange={(e) => setPriceFilter(e.target.value)}
+          >
+            <option value="all">Filter</option>
+            <option value="0-50000">Rp 0 - 50.000</option>
+            <option value="50000-100000">Rp 50.000 - 100.000</option>
+            <option value=">100000">&gt; Rp 100.000</option>
+          </select>
+        </div>
+
+        <Link
+          to="/tambahlayanan"
+          className="bg-blue-600 text-white px-6 py-2 rounded-xl text-sm hover:bg-blue-700"
+        >
+          Tambah
+        </Link>
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto bg-white rounded-xl shadow">
+        <table className="w-full text-sm text-left">
+          <thead className="bg-sky-600 text-white">
+            <tr>
+              <th className="p-4">No</th>
+              <th className="p-4">Nama</th>
+              <th className="p-4">Deskripsi</th>
+              <th className="p-4">Harga</th>
+              <th className="p-4">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              <tr>
+                <td colSpan="5" className="p-6 text-center">
+                  <LoadingSpinner text="Memuat data layanan..." />
+                </td>
+              </tr>
+            ) : currentItems.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="p-6 text-center text-gray-600">
+                  Data tidak tersedia.
+                </td>
+              </tr>
+            ) : (
+              currentItems.map((item, index) => (
+                <tr key={item.id} className="border-b hover:bg-gray-50 transition">
+                  <td className="p-4">{startIndex + index + 1}</td>
+                  <td className="p-4">{item.nama}</td>
+                  <td className="p-4">{item.deskripsi}</td>
+                  <td className="p-4">Rp {item.harga}</td>
+                  <td className="p-4">
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => navigate(`/edit/${item.id}`)}
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        <AiFillEdit size={18} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <AiFillDelete size={18} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination */}
+      {filteredLayanan.length > itemsPerPage && (
+        <div className="flex items-center justify-between mt-4 text-sm text-gray-700">
+          <div>
+            Menampilkan {startIndex + 1} -{" "}
+            {Math.min(startIndex + itemsPerPage, filteredLayanan.length)} dari{" "}
+            {filteredLayanan.length}
+          </div>
+          <div className="flex gap-1">
+            <button
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+              className="px-2 py-1 border rounded disabled:opacity-50"
+            >
+              {"<<"}
+            </button>
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-2 py-1 border rounded disabled:opacity-50"
+            >
+              {"<"}
+            </button>
+            <span className="px-3 py-1 border rounded bg-gray-100">
+              {currentPage} / {totalPages}
+            </span>
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="px-2 py-1 border rounded disabled:opacity-50"
+            >
+              {">"}
+            </button>
+            <button
+              onClick={() => setCurrentPage(totalPages)}
+              disabled={currentPage === totalPages}
+              className="px-2 py-1 border rounded disabled:opacity-50"
+            >
+              {">>"}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -27,8 +27,8 @@ export default function Navbar() {
           Home
         </NavLink>
 
-        <NavLink
-          to="/produktampil"
+        {/* <NavLink
+          to="/layanantampil"
           className={({ isActive }) =>
             `relative hover:text-yellow-500 font-serif ${
               isActive
@@ -38,7 +38,7 @@ export default function Navbar() {
           }
         >
           Layanan12
-        </NavLink>
+        </NavLink> */}
 
         <NavLink
           to="/layanan"

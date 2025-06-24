@@ -1,56 +1,46 @@
 import { HiOutlineHome } from "react-icons/hi";
 import { RiScissors2Line } from "react-icons/ri";
-import { FiUsers } from "react-icons/fi";
-import SidebarMenuItem from "/SidebarMenuItem"; // Komponen terpisah
-
-// export default function Sidebar() {
-//   return (
-//     <aside className="w-64 h-screen bg-white shadow-md p-4">
-//       <div className="font-bold text-lg mb-6">
-//         <p>Sistem Informasi Prestasi</p>
-//         <small className="text-gray-500">Kemahasiswaan PCR</small>
-//       </div>
-//       <nav className="flex flex-col gap-3">
-//         <a href="#" className="text-sm text-gray-700 hover:font-semibold">Dashboard</a>
-//         <a href="#" className="text-sm text-gray-700 hover:font-semibold">Prestasi</a>
-//         <a href="#" className="text-sm text-gray-700 hover:font-semibold">Pengajuan Lomba</a>
-//         <a href="#" className="text-sm text-blue-700 font-semibold">Pelaporan Prestasi</a>
-//         <a href="#" className="text-sm text-gray-700 hover:font-semibold">Bimbingan</a>
-//       </nav>
-//       <div className="absolute bottom-4 text-xs text-gray-400">© 2025 PCR</div>
-//     </aside>
-//   );
-// }
-// import React from "react";
-// import SidebarMenuItem from "../components/SidebarMenuItem";
-// import { MdDashboard } from "react-icons/md";
-// import { AiOutlineOrderedList } from "react-icons/ai";
-// import { BsFillPeopleFill } from "react-icons/bs";
-// import { MdFastfood, MdNote } from "react-icons/md";
+import { FiUsers, FiLogOut, FiUser } from "react-icons/fi";
+import SidebarMenuItem from "./SideBarMenuItem";
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 h-screen bg-white shadow-md p-6 flex flex-col justify-between">
+    <aside className="w-80 min-w-[5rem] h-screen bg-white shadow-md p-6 flex flex-col justify-between">
+
       {/* Header */}
       <div>
-        <div className="font-bold text-lg mb-6">
-          <p>Sistem Informasi Prestasi</p>
-          <small className="text-gray-500">Kemahasiswaan PCR</small>
+        {/* Logo */}
+        <div id="sidebar-logo" className="flex flex-col mb-6">
+          <span
+            id="logo-title"
+            className="font-serif font-extrabold text-2xl text-black leading-tight break-words"
+          >
+            DimensiHairStudio
+            <b className="text-yellow-400">.</b>
+          </span>
         </div>
 
         {/* Menu List */}
         <div id="sidebar-menu" className="mt-10">
           <ul id="menu-list" className="space-y-3">
-            <SidebarMenuItem to="/dashboard" icon={HiOutlineHome} label="Dashboard" />
-            <SidebarMenuItem to="/layanan" icon={RiScissors2Line} label="List Layanan" />
-            <SidebarMenuItem to="/pelanggan" icon={FiUsers} label="List Pelanggan" />
+            <SidebarMenuItem to="#" icon={HiOutlineHome} label="Dashboard" />
+            <SidebarMenuItem to="/layanantampil" icon={RiScissors2Line} label="List Layanan" />
+            <SidebarMenuItem to="#" icon={FiUsers} label="List Pelanggan" />
           </ul>
         </div>
       </div>
 
+      {/* Akun & Logout */}
+      <div className="space-y-2 mt-6">
+        <hr className="my-2 border-gray-200" />
+        <ul className="space-y-3">
+          <SidebarMenuItem to="/akun" icon={FiUser} label="Akun Saya" />
+          <SidebarMenuItem to="/logout" icon={FiLogOut} label="Keluar" />
+        </ul>
+      </div>
+
       {/* Footer */}
-      <div className="text-xs text-gray-400 mt-auto">© 2025 PCR</div>
+      <div className="text-xs text-gray-400 mt-4">© 2025 PCR</div>
     </aside>
   );
 }
-
