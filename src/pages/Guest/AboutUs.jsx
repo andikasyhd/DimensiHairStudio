@@ -1,10 +1,24 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 export default function AboutUs() {
   return (
     <section className="py-16 px-4 md:px-16 bg-black font-serif">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16 bg-gray-900 rounded-2xl shadow-2xl overflow-hidden transition-all duration-700 ease-out animate-fade-in">
-        {/* Bagian kiri: Gambar */}
-        <div className="w-full md:w-1/2 h-[250px] md:h-auto relative">
+      <motion.div
+        className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16 bg-gray-900 rounded-2xl shadow-2xl overflow-hidden"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        {/* Gambar */}
+        <motion.div
+          className="w-full md:w-1/2 h-[250px] md:h-auto relative"
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
           <img
             src="/img/aboutus.jpg"
             alt="DimensiHairStudio - Salon dan Barbershop Profesional"
@@ -12,10 +26,16 @@ export default function AboutUs() {
             loading="lazy"
             aria-label="Gambar DimensiHairStudio"
           />
-        </div>
+        </motion.div>
 
-        {/* Bagian kanan: Konten */}
-        <div className="w-full md:w-1/2 p-6 md:p-10">
+        {/* Konten */}
+        <motion.div
+          className="w-full md:w-1/2 p-6 md:p-10"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
           <p className="text-emerald-400 font-semibold uppercase mb-3 tracking-wide">
             Tentang Kami
           </p>
@@ -25,7 +45,6 @@ export default function AboutUs() {
           <p className="text-gray-300 text-base md:text-lg mb-6">
             Di <strong>DimensiHairStudio</strong>, kami tidak hanya memotong rambut—kami menciptakan pengalaman. Dengan tim profesional, layanan personal, dan suasana eksklusif, kami siap membantu Anda tampil lebih percaya diri dan bergaya.
           </p>
-          
 
           <Link
             to="/layanan"
@@ -33,9 +52,8 @@ export default function AboutUs() {
           >
             ✂️ Booking Sekarang
           </Link>
-
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

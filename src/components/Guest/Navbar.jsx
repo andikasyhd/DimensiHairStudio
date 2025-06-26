@@ -9,7 +9,6 @@ export default function Navbar() {
       {/* Kiri: Logo */}
       <div className="flex items-center gap-2 text-2xl font-bold pl-4 font-serif">
         <LogoGuest />
-        <span>DimensiHairStudio</span>
       </div>
 
       {/* Tengah: Menu navigasi */}
@@ -54,7 +53,7 @@ export default function Navbar() {
         </NavLink>
 
         <NavLink
-          to="/cek"
+          to="/kontak"
           className={({ isActive }) =>
             `relative hover:text-yellow-500 font-serif ${
               isActive
@@ -63,7 +62,7 @@ export default function Navbar() {
             }`
           }
         >
-          Pemesanan
+          Kontak
         </NavLink>
       </div>
     </nav>

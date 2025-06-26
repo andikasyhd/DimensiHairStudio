@@ -36,7 +36,7 @@ import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import GuestLayout from "./layouts/GuestLayout";
 import AdminLayout from "./layouts/AdminLayout";
-import Cek from "./pages/Guest/Cek";
+import Kontak from "./pages/Guest/Kontak";
 import FormPemesanan from "./pages/Guest/FormPemesanan";
 // import Homepage from "./pages/Guest/Homepage";
 // import LayananGuest from "./pages/Guest/LayananGuest";
@@ -54,7 +54,7 @@ const Login = React.lazy(() => import("./pages/auth/Admin/Login"));
 const Register = React.lazy(() => import("./pages/auth/Admin/Register"));
 const Loading = React.lazy(() => import("./components/Loading"));
 const ListPelanggan = React.lazy(() => import("./pages/Admin/ListPelanggan"));
-
+const Dashboard = React.lazy(() => import("./pages/Admin/Dashboard"))
 function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -67,7 +67,7 @@ function App() {
 
         <Route element={<GuestLayout />}>
           <Route path="/" element={<Homepage />} />
-          <Route path="/cek" element={<Cek />} />
+          <Route path="/kontak" element={<Kontak />} />
           <Route path="/layanan" element={<LayananGuest/>} />
           <Route path="/form" element={<FormPemesanan/>} />
         </Route>
@@ -79,6 +79,7 @@ function App() {
           <Route path="/tambahlayanan" element={<TambahLayanan/>} />
           <Route path="/listpelanggan" element={<ListPelanggan/>} />
           <Route path="/edit/:id" element={<EditLayanan/>} />  
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

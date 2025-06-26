@@ -12,7 +12,7 @@ export default function Layanan() {
   const [currentPage, setCurrentPage] = useState(1);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  const [confirmDeleteId, setConfirmDeleteId] = useState(null); // ✅ Konfirmasi ID
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
 
   const itemsPerPage = 10;
   const navigate = useNavigate();
@@ -86,77 +86,53 @@ export default function Layanan() {
     <div className="p-6">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Data Layanan</h1>
 
-      {/* ✅ Alert Error */}
+      {/* Alert */}
       {error && (
-        <div role="alert" className="alert alert-error mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            className="h-6 w-6 shrink-0 stroke-current">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-              d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+        <div className="alert alert-error mb-4">
           <span>{error}</span>
         </div>
       )}
-
-      {/* ✅ Alert Success */}
       {success && (
-        <div role="alert" className="alert alert-success mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            className="h-6 w-6 shrink-0 stroke-current">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+        <div className="alert alert-success mb-4">
           <span>{success}</span>
         </div>
       )}
-
-      {/* ✅ Alert Konfirmasi Hapus */}
       {confirmDeleteId && (
-        <div role="alert" className="alert alert-vertical sm:alert-horizontal mb-4 bg-yellow-100 text-black border border-yellow-400">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            className="stroke-info h-6 w-6 shrink-0">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
+        <div className="alert bg-yellow-100 text-black border border-yellow-400 mb-4">
           <span>Apakah Anda yakin ingin menghapus layanan ini?</span>
-          <div className="flex gap-2">
-            <button className="btn btn-sm" onClick={() => setConfirmDeleteId(null)}>
-              Batal
-            </button>
-            <button className="btn btn-sm btn-error" onClick={handleDeleteConfirmed}>
-              Hapus
-            </button>
+          <div className="flex gap-2 ml-auto">
+            <button className="btn btn-sm" onClick={() => setConfirmDeleteId(null)}>Batal</button>
+            <button className="btn btn-sm btn-error" onClick={handleDeleteConfirmed}>Hapus</button>
           </div>
         </div>
       )}
 
-      {/* Search + Filter + Tambah */}
+      {/* Filter & Search */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div className="flex gap-2 items-center w-full sm:w-auto">
           <input
             type="text"
-            placeholder="Cari data"
-            className="p-2 border rounded-xl w-full sm:w-64 text-sm"
+            placeholder="Cari nama layanan..."
+            className="p-2 border border-gray-300 rounded-xl w-full sm:w-64 text-sm"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
           <select
-            className="p-2 border rounded-xl text-sm"
+            className="p-2 border border-gray-300 rounded-xl text-sm"
             value={priceFilter}
             onChange={(e) => setPriceFilter(e.target.value)}
           >
-            <option value="all">Filter</option>
+            <option value="all">Filter Harga</option>
             <option value="0-50000">Rp 0 - 50.000</option>
             <option value="50000-100000">Rp 50.000 - 100.000</option>
             <option value=">100000">&gt; Rp 100.000</option>
           </select>
         </div>
-
         <Link
           to="/tambahlayanan"
           className="bg-blue-600 text-white px-6 py-2 rounded-xl text-sm hover:bg-blue-700"
         >
-          Tambah
+          Tambah Layanan
         </Link>
       </div>
 
@@ -187,7 +163,7 @@ export default function Layanan() {
               </tr>
             ) : (
               currentItems.map((item, index) => (
-                <tr key={item.id} className="border-b hover:bg-gray-50 transition">
+                <tr key={item.id} className="hover:bg-gray-50 transition">
                   <td className="p-4">{startIndex + index + 1}</td>
                   <td className="p-4">{item.nama}</td>
                   <td className="p-4">{item.deskripsi}</td>

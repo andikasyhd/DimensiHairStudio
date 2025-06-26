@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { layananAPI } from "../../service/layananAPI";
 import { AiFillStar } from "react-icons/ai";
+import { motion } from "framer-motion";
 
 export default function LayananGuest() {
   const [layanan, setLayanan] = useState([]);
@@ -23,7 +24,6 @@ export default function LayananGuest() {
     fetchLayanan();
   }, []);
 
-  // Fungsi untuk navigasi ke halaman form dan kirim data layanan
   const handleBookingClick = (layananItem) => {
     navigate("/form", { state: { layanan: layananItem } });
   };
@@ -31,9 +31,14 @@ export default function LayananGuest() {
   return (
     <section className="bg-gradient-to-b from-gray-900 via-black to-black text-white py-20 px-6 md:px-20 font-serif">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10">
+        <motion.h1
+          className="text-3xl md:text-4xl font-bold text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           Daftar Layanan Kami
-        </h1>
+        </motion.h1>
 
         {loading ? (
           <p className="text-center text-gray-300">Memuat layanan...</p>
@@ -41,10 +46,14 @@ export default function LayananGuest() {
           <p className="text-center text-gray-400">Belum ada layanan tersedia.</p>
         ) : (
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {layanan.map((item) => (
-              <div
+            {layanan.map((item, index) => (
+              <motion.div
                 key={item.id}
                 className="bg-gray-800 rounded-xl p-4 shadow-xl border border-gray-700 hover:shadow-2xl transition"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 {item.gambar && (
                   <img
@@ -75,7 +84,7 @@ export default function LayananGuest() {
                 >
                   Booking
                 </button>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
