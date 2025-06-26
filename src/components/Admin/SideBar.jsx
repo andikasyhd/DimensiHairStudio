@@ -26,13 +26,12 @@ export default function Sidebar() {
       </div>
 
       {/* Akun & Logout */}
-      {/* <div className="space-y-2 mt-6">
+      <div className="space-y-2 mt-6">
         <hr className="my-2 border-gray-300" />
         <ul className="space-y-2">
-          <SidebarMenuItem to="/akun" icon={FiUser} label="Akun Saya" />
-          <SidebarMenuItem to="/logout" icon={FiLogOut} label="Keluar" />
+          <SidebarMenuItem to="/" icon={FiLogOut} label="Keluar" />
         </ul>
-      </div> */}
+      </div>
 
       <div className="text-xs text-gray-500 mt-4">© 2025 DimensiHairStudio</div>
     </aside>
