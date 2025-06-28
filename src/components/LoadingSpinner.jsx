@@ -1,8 +1,8 @@
-export default function LoadingSpinner({ text = "Loading..." }) {
+export default function LoadingSpinner({ text = "Memuat layanan pangkas..." }) {
     return (
-        <div className="p-8 text-center text-gray-500">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600 mx-auto mb-2"></div>
-            {text}
+        <div className="p-8 text-center text-gray-600">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-amber-600 mx-auto mb-4"></div>
+            <p className="text-sm italic tracking-wide">{text}</p>
         </div>
-    )
+    );
 }

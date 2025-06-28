@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { pemesananAPI } from '../../service/pemesananAPI';
+import { UserPlus, CalendarCheck2 } from 'lucide-react';
 
-// Utilitas sessionStorage
 function getClickedKeys() {
   return new Set(JSON.parse(sessionStorage.getItem('klikKonfirmasi') || '[]'));
 }
+
 function addClickedKey(key) {
   const set = getClickedKeys();
   set.add(key);
@@ -56,13 +57,18 @@ export default function ListPelanggan() {
     }
 
     setFiltered(hasil);
-    setCurrentPage(1); // Reset ke halaman 1 saat filter berubah
+    setCurrentPage(1);
   }, [pemesanan, searchTerm, sortOrder]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = filtered.slice(startIndex, endIndex);
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
+
+  // ✅ Menghitung pemesanan hari ini berdasarkan created_at
+  const jumlahHariIni = pemesanan.filter(item =>
+    new Date(item.created_at).toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10)
+  ).length;
 
   const kirimPesan = (noHP, isiPesan) => {
     const nomor = noHP.replace(/^0/, '62').replace(/[^0-9]/g, '');
@@ -72,26 +78,13 @@ export default function ListPelanggan() {
 
   const buatPesanSetuju = (item) => {
     return encodeURIComponent(
-      `Halo ${item.nama},\n\n` +
-      `Terima kasih telah melakukan pemesanan layanan Pangkas.\n` +
-      `Pemesanan Anda telah diterima:\n` +
-      `- Tanggal: ${item.tanggal}\n` +
-      `- Waktu: ${item.waktu}\n\n` +
-      `Mohon datang tepat waktu sesuai jadwal.\n\n` +
-      `Salam,\nTim Layanan\nDimensi Hair Studio`
+      `Halo ${item.nama},\n\nTerima kasih telah melakukan pemesanan layanan Pangkas.\nPemesanan Anda telah diterima:\n- Tanggal: ${item.tanggal}\n- Waktu: ${item.waktu}\n\nMohon datang tepat waktu sesuai jadwal.\n\nSalam,\nTim Layanan\nDimensi Hair Studio`
     );
   };
 
   const buatPesanTolak = (item) => {
     return encodeURIComponent(
-      `Halo ${item.nama},\n\n` +
-      `Mohon maaf, pemesanan layanan Pangkas Anda:\n` +
-      `- Tanggal: ${item.tanggal}\n` +
-      `- Waktu: ${item.waktu}\n` +
-      `tidak dapat kami terima karena jadwal sudah penuh.\n\n` +
-      `Silakan coba booking di waktu lain.\n\n` +
-      `Terima kasih atas pengertiannya.\n\n` +
-      `Salam,\nTim Layanan\nDimensi Hair Studio`
+      `Halo ${item.nama},\n\nMohon maaf, pemesanan layanan Pangkas Anda:\n- Tanggal: ${item.tanggal}\n- Waktu: ${item.waktu}\nTidak dapat kami terima karena jadwal sudah penuh.\n\nSilakan coba booking di waktu lain.\n\nTerima kasih atas pengertiannya.\n\nSalam,\nTim Layanan\nDimensi Hair Studio`
     );
   };
 
@@ -106,15 +99,34 @@ export default function ListPelanggan() {
 
   return (
     <div className="p-8 text-black">
-      <h1 className="text-2xl font-bold mb-6">Daftar Pemesanan Pelanggan</h1>
+      <h1 className="text-2xl font-bold mb-6">📋 Daftar Pemesanan Pelanggan</h1>
 
+      {/* Ringkasan */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-white p-4 rounded-xl shadow flex items-center space-x-4 border border-gray-100">
+          <UserPlus className="text-blue-600" />
+          <div>
+            <p className="text-sm text-gray-500">Total Pelanggan</p>
+            <p className="text-xl font-semibold">{pemesanan.length}</p>
+          </div>
+        </div>
+        <div className="bg-white p-4 rounded-xl shadow flex items-center space-x-4 border border-gray-100">
+          <CalendarCheck2 className="text-green-600" />
+          <div>
+            <p className="text-sm text-gray-500">Pemesanan Hari Ini</p>
+            <p className="text-xl font-semibold">{jumlahHariIni}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter */}
       <div className="flex flex-wrap gap-4 mb-6">
         <input
           type="text"
           placeholder="Cari nama pelanggan..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="border border-gray-300 rounded-lg px-4 py-2 w-64 text-sm placeholder:text-gray-500 shadow-sm"
+          className="border border-gray-300 rounded-lg px-4 py-2 w-64 text-sm shadow-sm placeholder:text-gray-500"
         />
         <select
           value={sortOrder}
@@ -127,69 +139,81 @@ export default function ListPelanggan() {
         </select>
       </div>
 
-      <div className="overflow-x-auto rounded-lg shadow">
-        <table className="w-full text-sm border border-gray-200">
-          <thead className="bg-sky-600 text-white">
-            <tr>
-              <th className="px-4 py-3 text-left">No</th>
-              <th className="px-4 py-3 text-left">Nama</th>
-              <th className="px-4 py-3 text-left">No HP</th>
-              <th className="px-4 py-3 text-left">Tanggal</th>
-              <th className="px-4 py-3 text-left">Waktu</th>
-              <th className="px-4 py-3 text-left">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.length === 0 ? (
+      {/* Box Tabel */}
+      <div className="bg-white p-6 rounded-xl shadow border border-gray-200">
+        <h2 className="text-lg font-semibold mb-4">📑 Data Pemesanan</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left border-separate border-spacing-y-2">
+            <thead className="bg-sky-600 text-white">
               <tr>
-                <td colSpan="6" className="text-center py-6 text-gray-500">Tidak ada data pemesanan.</td>
+                <th className="px-4 py-3 rounded-l-xl">No</th>
+                <th className="px-4 py-3">Nama</th>
+                <th className="px-4 py-3">No HP</th>
+                <th className="px-4 py-3">Tanggal</th>
+                <th className="px-4 py-3">Waktu</th>
+                <th className="px-4 py-3 rounded-r-xl">Aksi</th>
               </tr>
-            ) : (
-              currentItems.map((item, index) => {
-                const key = `${item.nama}-${item.tanggal}-${item.waktu}`;
-                const isDisabled = getClickedKeys().has(key);
+            </thead>
+            <tbody>
+              {currentItems.length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="text-center py-6 text-gray-500">
+                    Tidak ada data pemesanan.
+                  </td>
+                </tr>
+              ) : (
+                currentItems.map((item, index) => {
+                  const key = `${item.nama}-${item.tanggal}-${item.waktu}`;
+                  const isDisabled = getClickedKeys().has(key);
 
-                return (
-                  <tr key={key} className="hover:bg-gray-100">
-                    <td className="px-4 py-2">{startIndex + index + 1}</td>
-                    <td className="px-4 py-2">{item.nama}</td>
-                    <td className="px-4 py-2">{item.noHP}</td>
-                    <td className="px-4 py-2">{item.tanggal}</td>
-                    <td className="px-4 py-2">{item.waktu}</td>
-                    <td className="px-4 py-2 space-x-2">
-                      <button
-                        disabled={isDisabled}
-                        onClick={() => handleKirimPesan(item, 'setuju')}
-                        className={`px-3 py-1 rounded text-sm text-white transition
-                          ${isDisabled
-                            ? 'bg-green-300 cursor-not-allowed'
-                            : 'bg-green-500 hover:bg-green-600'}`}
-                      >
-                        Setujui
-                      </button>
-                      <button
-                        disabled={isDisabled}
-                        onClick={() => handleKirimPesan(item, 'tolak')}
-                        className={`px-3 py-1 rounded text-sm text-white transition
-                          ${isDisabled
-                            ? 'bg-red-300 cursor-not-allowed'
-                            : 'bg-red-500 hover:bg-red-600'}`}
-                      >
-                        Tolak
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
+                  return (
+                    <tr
+                      key={key}
+                      className="bg-gray-50 hover:bg-gray-100 rounded-xl"
+                    >
+                      <td className="px-4 py-2">{startIndex + index + 1}</td>
+                      <td className="px-4 py-2">{item.nama}</td>
+                      <td className="px-4 py-2">{item.noHP}</td>
+                      <td className="px-4 py-2">{item.tanggal}</td>
+                      <td className="px-4 py-2">{item.waktu}</td>
+                      <td className="px-4 py-2 space-x-2">
+                        <button
+                          disabled={isDisabled}
+                          onClick={() => handleKirimPesan(item, 'setuju')}
+                          className={`px-3 py-1 rounded text-sm text-white transition ${
+                            isDisabled
+                              ? 'bg-green-300 cursor-not-allowed'
+                              : 'bg-green-500 hover:bg-green-600'
+                          }`}
+                        >
+                          Setujui
+                        </button>
+                        <button
+                          disabled={isDisabled}
+                          onClick={() => handleKirimPesan(item, 'tolak')}
+                          className={`px-3 py-1 rounded text-sm text-white transition ${
+                            isDisabled
+                              ? 'bg-red-300 cursor-not-allowed'
+                              : 'bg-red-500 hover:bg-red-600'
+                          }`}
+                        >
+                          Tolak
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between mt-4 text-sm text-gray-700">
+      <div className="flex items-center justify-between mt-6 text-sm text-gray-700">
         <p>
-          Menampilkan {filtered.length === 0 ? 0 : startIndex + 1} - {Math.min(endIndex, filtered.length)} dari {filtered.length}
+          Menampilkan {filtered.length === 0 ? 0 : startIndex + 1} -{' '}
+          {Math.min(endIndex, filtered.length)} dari {filtered.length}
         </p>
         <div className="flex items-center space-x-1">
           <button
@@ -201,17 +225,19 @@ export default function ListPelanggan() {
           </button>
           <button
             className="px-2 py-1 border rounded disabled:opacity-50"
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
             &lt;
           </button>
-          <span className="px-3 py-1 border rounded text-sm">
+          <span className="px-3 py-1 border rounded">
             {currentPage} / {totalPages}
           </span>
           <button
             className="px-2 py-1 border rounded disabled:opacity-50"
-            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
             disabled={currentPage === totalPages}
           >
             &gt;

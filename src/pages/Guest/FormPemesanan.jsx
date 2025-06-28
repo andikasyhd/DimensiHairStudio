@@ -4,11 +4,12 @@ import { pemesananAPI } from "../../service/pemesananAPI";
 
 export default function FormPemesanan() {
   const [nama, setNama] = useState('');
-  const [noHP, setNoHP] = useState(''); // ← Tambahkan state noHP
+  const [noHP, setNoHP] = useState('');
   const [tanggal, setTanggal] = useState('');
   const [waktu, setWaktu] = useState('');
   const [success, setSuccess] = useState(false);
   const [layanan, setLayanan] = useState(null);
+  const [minDate, setMinDate] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,16 +21,33 @@ export default function FormPemesanan() {
     } else {
       navigate('/layanan');
     }
+
+    // Set tanggal minimum ke hari ini
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    setMinDate(`${yyyy}-${mm}-${dd}`);
   }, [location.state]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validasi manual: tanggal tidak boleh di masa lalu
+    const selectedDate = new Date(tanggal);
+    const now = new Date();
+    now.setHours(0, 0, 0, 0); // hanya bandingkan tanggal
+
+    if (selectedDate < now) {
+      alert("Tanggal tidak boleh di masa lalu.");
+      return;
+    }
+
     try {
       await pemesananAPI.createPemesanan({
         id: layanan?.id,
         nama,
-        noHP,      // ← Sertakan noHP dalam data pemesanan
+        noHP,
         tanggal,
         waktu,
       });
@@ -40,7 +58,6 @@ export default function FormPemesanan() {
         navigate('/layanan');
       }, 2000);
 
-      // Reset field
       setNama('');
       setNoHP('');
       setTanggal('');
@@ -107,6 +124,7 @@ export default function FormPemesanan() {
               onChange={(e) => setTanggal(e.target.value)}
               className="input input-bordered w-full bg-gray-800 text-white border-white/20"
               required
+              min={minDate} // Batas minimum hari ini
             />
           </div>
 
