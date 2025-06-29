@@ -17,7 +17,7 @@ export default function Login() {
     try {
       const user = await adminAPI.login(dataForm);
       localStorage.setItem("admin", JSON.stringify(user));
-      navigate("/layanantampil");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message || "Gagal login");
     }

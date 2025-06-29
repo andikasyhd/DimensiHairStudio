@@ -20,11 +20,23 @@ export const pemesananAPI = {
     return response.data;
   },
 
-  async getAllPemesanan() {
+  // async getAllPemesanan() {
+  //   const response = await axios.get(API_URL, { headers });
+  //   return response.data;
+  // },
+   async getAllPemesanan() {
     const response = await axios.get(API_URL, { headers });
     return response.data;
   },
 
+  async updateStatus(id, status) {
+    const response = await axios.patch(
+      `${API_URL}?id=eq.${id}`,
+      { status },
+      { headers }
+    );
+    return response.data;
+  },
   async deletePemesanan(id) {
     await axios.delete(`${API_URL}?id=eq.${id}`, { headers });
   },

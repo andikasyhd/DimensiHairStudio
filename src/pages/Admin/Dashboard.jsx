@@ -14,7 +14,6 @@ import {
   FaCut,
   FaUserClock,
   FaClock,
-  FaMoneyBillWave,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -61,7 +60,8 @@ export default function Dashboard() {
         setJumlahLayanan(layanan.length);
 
         const today = new Date();
-        const hariIniStr = today.toISOString().split("T")[0];
+        const hariIniStr = today.toLocaleDateString("en-CA"); // ← Gunakan waktu lokal
+
         let countHariIni = 0;
         let pendapatan = 0;
 
@@ -77,7 +77,8 @@ export default function Dashboard() {
 
         pemesanan.forEach((item) => {
           const createdAt = new Date(item.created_at);
-          const createdDateStr = createdAt.toISOString().split("T")[0];
+          const createdDateStr = createdAt.toLocaleDateString("en-CA"); // ← Juga lokal
+
           if (createdDateStr === hariIniStr) {
             countHariIni += 1;
           }
@@ -98,9 +99,10 @@ export default function Dashboard() {
         }));
 
         setJumlahPelangganHariIni(countHariIni);
+        setTotalPendapatan(pendapatan);
         setPelangganPerLayanan(layananArray);
         setPelangganBulanan(pelangganBulananDefault);
-        
+
       } catch (err) {
         console.error("Gagal ambil data dashboard:", err);
       }
@@ -120,8 +122,6 @@ export default function Dashboard() {
         <StatCard icon={<FaUserClock size={30} />} label="Hari Ini" value={jumlahPelangganHariIni} color="bg-purple-500" />
         <ClockCard icon={<FaClock size={30} />} waktu={waktuSekarang} />
       </div>
-
-    
 
       {/* Grafik Pelanggan per Layanan */}
       <div className="bg-white rounded-xl shadow p-5">
