@@ -61,12 +61,12 @@ function App() {
       <Routes>
         
         <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
 
         <Route element={<GuestLayout />}>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/home" element={<Homepage />} />
           <Route path="/kontak" element={<Kontak />} />
           <Route path="/layanan" element={<LayananGuest/>} />
           <Route path="/form" element={<FormPemesanan/>} />

@@ -41,8 +41,8 @@ export default function TambahLayanan() {
       return;
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      setError("Ukuran gambar maksimal 2MB.");
+    if (file.size > 10 * 1024 * 1024) {
+      setError("Ukuran gambar maksimal 10MB.");
       setPreviewUrl("");
       setGambar(null);
       return;

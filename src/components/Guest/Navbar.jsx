@@ -14,7 +14,7 @@ export default function Navbar() {
       {/* Tengah: Menu navigasi */}
       <div className="hidden md:flex gap-6 text-base font-medium">
         <NavLink
-          to="/"
+          to="/home"
           className={({ isActive }) =>
             `relative hover:text-yellow-500 font-serif ${
               isActive
@@ -66,7 +66,7 @@ export default function Navbar() {
         </NavLink>
 
         <NavLink
-          to="/login"
+          to="/"
           className={({ isActive }) =>
             `relative hover:text-yellow-500 font-serif ${
               isActive
@@ -75,7 +75,7 @@ export default function Navbar() {
             }`
           }
         >
-          Sign Up
+          Log Out
         </NavLink>
     
       </div>

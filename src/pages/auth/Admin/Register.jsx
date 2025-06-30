@@ -16,8 +16,12 @@ export default function Register() {
       return;
     }
     try {
-      await adminAPI.register({ username: formData.username, password: formData.password });
-      navigate("/login");
+      await adminAPI.register({
+        username: formData.username,
+        password: formData.password,
+        // Tidak perlu kirim role karena default 'guest' di Supabase
+      });
+      navigate("/");
     } catch (err) {
       setError(err.message || "Gagal registrasi");
     }
@@ -86,7 +90,7 @@ export default function Register() {
 
         <p className="text-sm text-center mt-4 text-gray-300">
           Sudah punya akun?{" "}
-          <a href="/login" className="text-yellow-400 hover:underline">
+          <a href="/" className="text-yellow-400 hover:underline">
             Login di sini
           </a>
         </p>

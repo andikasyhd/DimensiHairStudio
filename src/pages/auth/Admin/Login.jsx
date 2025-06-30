@@ -17,7 +17,15 @@ export default function Login() {
     try {
       const user = await adminAPI.login(dataForm);
       localStorage.setItem("admin", JSON.stringify(user));
-      navigate("/dashboard");
+
+      // Arahkan sesuai role
+      if (user.role === "admin") {
+        navigate("/dashboard");
+      } else if (user.role === "guest") {
+        navigate("/layanan");
+      } else {
+        setError("Role tidak dikenali");
+      }
     } catch (err) {
       setError(err.message || "Gagal login");
     }
@@ -26,7 +34,7 @@ export default function Login() {
   return (
     <div className="w-full">
       <h2 className="text-xl font-semibold text-white text-center mb-6">
-        Login Admin <span className="inline-block">🔒</span>
+        Login <span className="inline-block">🔒</span>
       </h2>
 
       {error && (

@@ -29,7 +29,7 @@ export default function Sidebar() {
       <div className="space-y-2 mt-6">
         <hr className="my-2 border-gray-300" />
         <ul className="space-y-2">
-          <SidebarMenuItem to="/" icon={FiLogOut} label="Keluar" />
+          <SidebarMenuItem to="/" icon={FiLogOut} label="Log Out" />
         </ul>
       </div>
 
