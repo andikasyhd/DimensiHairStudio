@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { layananAPI } from "../../service/layananAPI";
+import { FaUpload, FaImage, FaCheck, FaTimes, FaEdit, FaMoneyBill } from "react-icons/fa";
 
 export default function EditLayanan() {
   const { id } = useParams();
@@ -47,11 +48,7 @@ export default function EditLayanan() {
   const handleGambarChange = (e) => {
     const file = e.target.files?.[0];
 
-    if (!file) {
-      setGambarBaru(null);
-      setPreviewUrl("");
-      return;
-    }
+    if (!file) return;
 
     if (!file.type.startsWith("image/")) {
       setError("File harus berupa gambar.");
@@ -59,14 +56,13 @@ export default function EditLayanan() {
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      setError("Ukuran gambar maksimal 2MB.");
+      setError("Ukuran gambar maksimal 10MB.");
       return;
     }
 
     setError("");
     setGambarBaru(file);
-    const preview = URL.createObjectURL(file);
-    setPreviewUrl(preview);
+    setPreviewUrl(URL.createObjectURL(file));
   };
 
   const handleSubmit = async (e) => {
@@ -77,23 +73,18 @@ export default function EditLayanan() {
 
     try {
       let imageUrl = formData.gambar;
-
       if (gambarBaru) {
         imageUrl = await layananAPI.uploadGambar(gambarBaru);
       }
 
-      const updatedData = {
+      await layananAPI.updateLayanan(id, {
         ...formData,
         gambar: imageUrl,
-      };
+      });
 
-      await layananAPI.updateLayanan(id, updatedData);
       setSuccess("✅ Layanan berhasil diperbarui!");
-      setTimeout(() => {
-        navigate("/layanantampil");
-      }, 1500);
+      setTimeout(() => navigate("/layanantampil"), 1500);
     } catch (err) {
-      console.error(err);
       setError("❌ Gagal memperbarui layanan.");
     } finally {
       setLoading(false);
@@ -101,9 +92,15 @@ export default function EditLayanan() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white py-10 px-4 sm:px-10">
-      <div className="max-w-2xl ml-0 bg-white shadow-xl rounded-3xl p-8 border border-gray-200 transition-all">
-        <h2 className="text-3xl font-extrabold text-gray-800 mb-6">Edit Layanan</h2>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100 py-10 px-4 sm:px-10">
+      <div className="max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-tr from-purple-500 to-indigo-500 text-white rounded-full mb-2 shadow-lg">
+            <FaEdit size={24} />
+          </div>
+          <h2 className="text-3xl font-bold text-gray-800">Edit Layanan</h2>
+          <p className="text-sm text-gray-500">Perbarui informasi layanan Anda dengan mudah</p>
+        </div>
 
         {error && (
           <div className="mb-4 text-red-700 bg-red-100 border border-red-300 px-4 py-3 rounded-lg">
@@ -116,105 +113,120 @@ export default function EditLayanan() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block font-semibold text-gray-700 mb-2">Nama Layanan</label>
-            <input
-              type="text"
-              name="nama"
-              value={formData.nama}
-              onChange={handleChange}
-              required
-              placeholder="Contoh: Potong Rambut"
-              className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400"
-            />
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Kolom Form */}
+          <div className="space-y-5">
+            <div>
+              <label className="font-semibold flex items-center gap-2 text-gray-700 mb-1">
+                <FaEdit /> Nama Layanan
+              </label>
+              <input
+                type="text"
+                name="nama"
+                value={formData.nama}
+                onChange={handleChange}
+                required
+                placeholder="Contoh: Potong Rambut Premium"
+                className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-400"
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold flex items-center gap-2 text-gray-700 mb-1">
+                <FaMoneyBill /> Harga (Rupiah)
+              </label>
+              <div className="relative">
+                <span className="absolute left-4 top-4 text-gray-400">Rp</span>
+                <input
+                  type="number"
+                  name="harga"
+                  value={formData.harga}
+                  onChange={handleChange}
+                  required
+                  className="w-full pl-10 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-400"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="font-semibold flex items-center gap-2 text-gray-700 mb-1">
+                <FaEdit /> Deskripsi Layanan
+              </label>
+              <textarea
+                name="deskripsi"
+                value={formData.deskripsi}
+                onChange={handleChange}
+                rows={4}
+                required
+                className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-purple-400"
+              />
+            </div>
           </div>
 
+          {/* Kolom Gambar */}
           <div>
-            <label className="block font-semibold text-gray-700 mb-2">Harga</label>
-            <input
-              type="number"
-              name="harga"
-              value={formData.harga}
-              onChange={handleChange}
-              required
-              placeholder="Contoh: 25000"
-              className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
+            <label className="font-semibold flex items-center gap-2 text-gray-700 mb-2">
+              <FaImage /> Upload Gambar
+            </label>
+            <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
+              <label className="cursor-pointer flex flex-col items-center gap-2 text-gray-500">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg">
+                  <FaUpload />
+                </div>
+                <span>Drag & drop gambar di sini</span>
+                <span className="text-blue-500 underline">klik untuk browse</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleGambarChange}
+                  className="hidden"
+                />
+                <p className="text-sm text-gray-400 mt-1">PNG, JPG, JPEG (Max. 10MB)</p>
+              </label>
+            </div>
 
-          <div>
-            <label className="block font-semibold text-gray-700 mb-2">Deskripsi</label>
-            <textarea
-              name="deskripsi"
-              value={formData.deskripsi}
-              onChange={handleChange}
-              rows={4}
-              required
-              placeholder="Deskripsikan layanan secara singkat..."
-              className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div>
-            <label className="block font-semibold text-gray-700 mb-2">Upload Gambar Baru</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleGambarChange}
-              className="file-input file-input-bordered w-full"
-            />
-            {previewUrl && (
-              <div className="mt-4">
-                <p className="text-sm text-gray-500 mb-1">Preview Gambar Baru:</p>
+            {(previewUrl || formData.gambar) && (
+              <div className="mt-5">
+                <p className="text-sm text-gray-500 mb-2">Gambar Saat Ini:</p>
                 <img
-                  src={previewUrl}
+                  src={previewUrl || formData.gambar}
                   alt="Preview"
                   onClick={() => setIsModalOpen(true)}
-                  className="w-48 h-48 object-cover border rounded-xl cursor-zoom-in hover:scale-105 transition-transform duration-300"
+                  className="w-full rounded-xl shadow-md cursor-zoom-in object-cover max-h-64"
                 />
               </div>
             )}
           </div>
 
-          {!previewUrl && formData.gambar && (
-            <div className="mt-4">
-              <p className="text-sm text-gray-500 mb-1">Gambar Saat Ini:</p>
-              <img
-                src={formData.gambar}
-                alt="Gambar Lama"
-                className="w-48 h-48 object-cover border rounded-xl"
-              />
-            </div>
-          )}
-
-          <div className="flex justify-end gap-4 pt-4">
+          {/* Tombol Aksi */}
+          <div className="md:col-span-2 flex justify-end gap-4 mt-4">
             <button
               type="button"
               onClick={() => navigate("/layanantampil")}
-              className="px-6 py-3 rounded-xl border border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-400 text-gray-600 font-medium hover:bg-gray-100 transition"
             >
-              Batal
+              <FaTimes /> Batal
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+              className="flex items-center gap-2  bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg transition disabled:opacity-50"
             >
-              {loading ? "Menyimpan..." : "Simpan"}
+              <FaCheck />
+              {loading ? "Menyimpan..." : "Simpan Perubahan"}
             </button>
           </div>
         </form>
       </div>
 
-      {/* Modal Zoom Gambar */}
+      {/* Modal Gambar */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center"
           onClick={() => setIsModalOpen(false)}
         >
           <img
-            src={previewUrl}
+            src={previewUrl || formData.gambar}
             alt="Zoom Gambar"
             className="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white"
           />

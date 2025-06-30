@@ -1,15 +1,46 @@
 import { NavLink } from "react-router-dom";
 
-export default function SidebarMenuItem({ to, icon: Icon, label }) {
+export default function SidebarMenuItem({ to, icon: Icon, label, isActive = false, isCollapsed = false, onClick }) {
   return (
     <li>
-      <NavLink
-        to={to}
-        className="flex items-center px-4 py-2 rounded-lg text-black hover:bg-sky-600 hover:text-white transition-colors duration-200"
+      <a
+        href={to}
+        onClick={onClick}
+        className={`group relative flex items-center px-4 py-3 rounded-xl transition-all duration-300 overflow-hidden
+          ${isActive 
+            ? 'bg-sky-600 text-white shadow-md scale-[1.02]' 
+            : 'bg-white text-gray-800 hover:bg-sky-600 hover:text-white'
+          }
+          ${isCollapsed ? 'justify-center' : 'justify-start'}
+        `}
       >
-        <Icon className="mr-2" />
-        {label}
-      </NavLink>
+        {/* Ikon */}
+        <Icon className={`text-xl relative z-10 transition-colors duration-200
+          ${isActive 
+            ? 'text-white' 
+            : label.toLowerCase().includes("admin") 
+              ? 'text-sky-600 group-hover:text-white' // ikon admin tetap biru
+              : 'text-gray-600 group-hover:text-white'
+          }
+          ${isCollapsed ? 'mr-0' : 'mr-3'}
+        `} />
+
+        {/* Label */}
+        {!isCollapsed && (
+          <span className={`font-medium relative z-10 transition-colors duration-200
+            ${isActive ? 'text-white' : 'group-hover:text-white'}
+          `}>
+            {label}
+          </span>
+        )}
+
+        {/* Tooltip */}
+        {isCollapsed && (
+          <div className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-20">
+            {label}
+          </div>
+        )}
+      </a>
     </li>
   );
 }

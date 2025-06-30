@@ -119,7 +119,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard icon={<FaCut size={30} />} label="Jumlah Layanan" value={jumlahLayanan} color="bg-emerald-500" />
         <StatCard icon={<FaUserFriends size={30} />} label="Total Pelanggan" value={jumlahPelanggan} color="bg-blue-500" />
-        <StatCard icon={<FaUserClock size={30} />} label="Hari Ini" value={jumlahPelangganHariIni} color="bg-purple-500" />
+        <StatCard icon={<FaUserClock size={30} />} label="Pelanggan Hari Ini" value={jumlahPelangganHariIni} color="bg-purple-500" />
         <ClockCard icon={<FaClock size={30} />} waktu={waktuSekarang} />
       </div>
 
