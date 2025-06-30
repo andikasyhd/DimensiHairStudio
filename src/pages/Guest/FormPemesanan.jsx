@@ -139,7 +139,10 @@ export default function FormPemesanan() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-full transition-transform hover:scale-105">
+          <button
+            type="submit"
+            className="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-transform hover:scale-105"
+          >
             Booking
           </button>
 

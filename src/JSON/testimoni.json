@@ -5,7 +5,7 @@
     "title": "Pekerja Kreatif",
     "rating": 5,
     "comment": "Pelayanannya luar biasa! Potongannya sangat presisi dan hasil akhirnya benar-benar bikin tampil percaya diri.",
-    "image_url": "/public/img/satu.jpg"
+    "image_url": "/img/satu.jpg"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "title": "Konsultan Gaya Hidup",
     "rating": 4,
     "comment": "Nyaman dan cepat! Potongan rambut saya terlihat lebih segar dan rapi. Cocok untuk profesional muda.",
-    "image_url": "/public/img/dua.jpg"
+    "image_url": "/img/dua.jpg"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "title": "Pegiat Fashion",
     "rating": 5,
     "comment": "Barbershop terbaik yang pernah saya coba. Hasil cukur sangat stylish dan penata rambutnya komunikatif!",
-    "image_url": "/public/img/tiga.jpg"
+    "image_url": "/img/tiga.jpg"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "title": "Pengamat Tren Rambut",
     "rating": 3,
     "comment": "Cukup memuaskan, walau masih ada ruang perbaikan. Beberapa detail bisa lebih diperhatikan.",
-    "image_url": "/public/img/empat.jpg"
+    "image_url": "/img/empat.jpg"
   },
   {
     "id": 5,
@@ -37,6 +37,6 @@
     "title": "Karyawan Kantoran",
     "rating": 4,
     "comment": "Tempat yang nyaman dan hasil pangkas sesuai ekspektasi. Pasti akan kembali untuk treatment berikutnya!",
-    "image_url": "/public/img/lima.jpg"
+    "image_url": "/img/lima.jpg"
   }
 ]
