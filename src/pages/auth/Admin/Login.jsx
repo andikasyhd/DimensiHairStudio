@@ -22,7 +22,7 @@ export default function Login() {
       if (user.role === "admin") {
         navigate("/dashboard");
       } else if (user.role === "guest") {
-        navigate("/layanan");
+        navigate("/home");
       } else {
         setError("Role tidak dikenali");
       }
