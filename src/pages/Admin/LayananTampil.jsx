@@ -280,7 +280,8 @@ export default function Layanan() {
                     <h2 className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
                       {item.nama}
                     </h2>
-                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
+                    <div className="flex gap-2 opacity-100 transition-all duration-300 transform md:opacity-0 md:group-hover:opacity-100 md:translate-x-4 md:group-hover:translate-x-0">
+
                       <button
                         onClick={() => navigate(`/edit/${item.id}`)}
                         className="p-2 bg-blue-100 text-blue-600 rounded-xl hover:bg-blue-200 transition-colors duration-200 transform hover:scale-110"
