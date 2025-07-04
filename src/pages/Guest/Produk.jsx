@@ -6,7 +6,7 @@ export default function Produk() {
   const lainnya = jobs.slice(1, 4);
 
   return (
-    <section className="px-6 md:px-12 py-20 bg-black font-serif">
+    <section className="px-4 sm:px-6 md:px-12 py-20 bg-black font-serif">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -16,10 +16,10 @@ export default function Produk() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
             Layanan <span className="text-emerald-400">Unggulan</span>
           </h2>
-          <p className="text-gray-300 mt-2">
+          <p className="text-gray-300 mt-2 text-sm sm:text-base">
             Rangkaian layanan terbaik untuk tampilan rambut yang menawan di DimensiHairStudio.
           </p>
         </motion.div>
@@ -38,12 +38,12 @@ export default function Produk() {
             <img
               src={utama.gambar}
               alt={utama.nama}
-              className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-64 sm:h-72 md:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-              <p className="text-sm opacity-80 mb-1">{utama.lokasi || "DimensiHairStudio"}</p>
-              <h3 className="text-2xl font-bold mb-1 truncate">{utama.nama}</h3>
-              <div className="flex justify-between items-center text-sm">
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6 text-white">
+              <p className="text-xs sm:text-sm opacity-80 mb-1">{utama.lokasi || "DimensiHairStudio"}</p>
+              <h3 className="text-xl sm:text-2xl font-bold mb-1 truncate">{utama.nama}</h3>
+              <div className="flex justify-between items-center text-xs sm:text-sm">
                 <span className="font-semibold">Rp {utama.harga}</span>
                 <div className="flex items-center gap-1">
                   <span className="text-yellow-400">★★★★★</span>
@@ -64,7 +64,7 @@ export default function Produk() {
             {lainnya.map((produk, index) => (
               <motion.div
                 key={produk.id}
-                className="flex items-center bg-gray-800/70 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 group"
+                className="flex flex-col sm:flex-row items-center bg-gray-800/70 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 group"
                 whileHover={{ scale: 1.015 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ export default function Produk() {
                 viewport={{ once: true }}
               >
                 {/* Gambar */}
-                <div className="w-32 h-32 flex-shrink-0">
+                <div className="w-full sm:w-32 h-48 sm:h-32 flex-shrink-0">
                   <img
                     src={produk.gambar}
                     alt={produk.nama}
@@ -81,13 +81,13 @@ export default function Produk() {
                 </div>
 
                 {/* Konten */}
-                <div className="p-4 flex-1 min-w-0">
-                  <h4 className="text-lg font-bold text-white truncate mb-1">
+                <div className="p-4 flex-1 min-w-0 text-center sm:text-left">
+                  <h4 className="text-base sm:text-lg font-bold text-white truncate mb-1">
                     {produk.nama}
                   </h4>
-                  <div className="flex justify-between items-center text-sm text-gray-300">
+                  <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-300">
                     <span className="font-semibold">Rp {produk.harga}</span>
-                    <div className="flex items-center gap-1 text-yellow-400">
+                    <div className="flex items-center gap-1 text-yellow-400 mt-1 sm:mt-0">
                       ★★★★☆ <span className="ml-1 text-gray-400">4.5</span>
                     </div>
                   </div>
