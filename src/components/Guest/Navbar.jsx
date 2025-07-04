@@ -29,10 +29,18 @@ export default function Navbar() {
           <LogoGuest />
         </div>
 
-        {/* Tombol Hamburger */}
+        {/* Tombol Hamburger (Mobile) */}
         <div className="md:hidden">
-          <button onClick={toggleMenu} aria-label="Toggle Menu">
-            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          <button
+            onClick={toggleMenu}
+            aria-label="Toggle Menu"
+            className="text-white bg-black p-2 rounded"
+          >
+            {isMobileMenuOpen ? (
+              <FaTimes size={24} />
+            ) : (
+              <FaBars size={24} />
+            )}
           </button>
         </div>
 
@@ -59,7 +67,7 @@ export default function Navbar() {
 
       {/* Menu Mobile */}
       {isMobileMenuOpen && (
-        <div className="md:hidden px-6 pb-4">
+        <div className="md:hidden px-6 pb-4 bg-black text-white">
           <div className="flex flex-col gap-4 text-base font-medium">
             {navLinks.map(({ to, label }) => (
               <NavLink
