@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { HiOutlineHome, HiMenu, HiX } from "react-icons/hi";
 import { RiScissors2Line } from "react-icons/ri";
-import { FiUsers, FiLogOut, FiUser } from "react-icons/fi";
+import { FiUsers, FiLogOut, FiUser , FiMessageCircle } from "react-icons/fi";
+
 import SidebarMenuItem from "./SideBarMenuItem";
 import { useLocation } from 'react-router-dom';
 
