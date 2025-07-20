@@ -168,10 +168,9 @@ export default function LayananGuest() {
                       <h2 className="text-md font-bold text-emerald-400 truncate flex-1">{item.nama}</h2>
                       <button
                         onClick={() => openDetailModal(item)}
-                        className="text-gray-400 hover:text-emerald-400 transition-colors ml-2"
+                        className=" hover:text-emerald-400 transition-colors ml-2"
                       >
-                        <AiOutlineInfoCircle className="text-emerald-400 w-5 h-5" />
-
+                        <AiOutlineInfoCircle size={18} />
                       </button>
                     </div>
                     
