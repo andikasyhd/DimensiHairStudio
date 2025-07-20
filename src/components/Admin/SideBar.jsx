@@ -37,11 +37,11 @@ const [activeItem, setActiveItem] = useState(location.pathname);
 
       {/* Overlay for mobile */}
       {isMobileOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={() => setIsMobileOpen(false)}
-        />
-      )}
+  <div
+    className="fixed inset-0 z-40 bg-black/40 backdrop-blur-md lg:hidden"
+    onClick={() => setIsMobileOpen(false)}
+  />
+)}
 
       {/* Sidebar Container */}
       <aside className={`
