@@ -38,6 +38,8 @@ import GuestLayout from "./layouts/GuestLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Kontak from "./pages/Guest/Kontak";
 import FormPemesanan from "./pages/Guest/FormPemesanan";
+import Feedback from "./pages/Guest/Feedback";
+import FeedbackPelanggan from "./pages/Admin/FeedbackPelanggan";
 // import Homepage from "./pages/Guest/Homepage";
 // import LayananGuest from "./pages/Guest/LayananGuest";
 
@@ -70,6 +72,8 @@ function App() {
           <Route path="/kontak" element={<Kontak />} />
           <Route path="/layanan" element={<LayananGuest/>} />
           <Route path="/form" element={<FormPemesanan/>} />
+          <Route path="/feedback" element={<Feedback/>} />
+
         </Route>
 
         <Route element={<AdminLayout />}>
@@ -80,6 +84,7 @@ function App() {
           <Route path="/listpelanggan" element={<ListPelanggan/>} />
           <Route path="/edit/:id" element={<EditLayanan/>} />  
           <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/feedbackpelanggan" element={<FeedbackPelanggan/>}/>
         </Route>
 
         <Route path="*" element={<NotFound />} />

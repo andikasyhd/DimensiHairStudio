@@ -54,6 +54,15 @@ export default function Kontak() {
                 </a>
               </li>
             </ul>
+            {/* Tombol Feedback */}
+            <div className="mt-8">
+              <a
+                href="/feedback"
+                className="inline-block bg-yellow-400 text-black font-semibold py-2 px-6 rounded-xl hover:bg-yellow-300 transition duration-300"
+              >
+                Beri Feedback
+              </a>
+            </div>
           </motion.div>
 
           {/* Peta Lokasi */}

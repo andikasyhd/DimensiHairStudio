@@ -15,6 +15,7 @@ const [activeItem, setActiveItem] = useState(location.pathname);
     { to: "/dashboard", icon: HiOutlineHome, label: "Dashboard" },
     { to: "/layanantampil", icon: RiScissors2Line, label: "List Layanan" },
     { to: "/listpelanggan", icon: FiUsers, label: "List Pelanggan" },
+    { to: "/feedbackpelanggan", icon: FiUsers, label: "Feedback" },
   ];
 
   const handleMenuClick = (to) => {
