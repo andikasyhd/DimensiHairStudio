@@ -162,20 +162,21 @@ export default function LayananGuest() {
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="p-4 flex flex-col flex-grow">
                     <div className="flex justify-between items-start mb-2">
                       <h2 className="text-md font-bold text-emerald-400 truncate flex-1">{item.nama}</h2>
                       <button
                         onClick={() => openDetailModal(item)}
-                        className=" hover:text-emerald-400 transition-colors ml-2"
+                        className="p-2 rounded-full hover:bg-emerald-600/20 transition-colors"
                       >
-                        <AiOutlineInfoCircle size={18} />
+                        <AiOutlineInfoCircle className="text-emerald-400" size={20} />
                       </button>
+
                     </div>
-                    
+
                     <p className="text-xs text-gray-300 mb-2 line-clamp-2">{item.deskripsi}</p>
-                    
+
                     <div className="flex items-center justify-between mb-2">
                       <p className="text-lg font-semibold text-white">
                         Rp {Number(item.harga).toLocaleString("id-ID")}
@@ -184,14 +185,14 @@ export default function LayananGuest() {
                         Populer
                       </span>
                     </div>
-                    
+
                     <div className="flex items-center gap-1 text-yellow-400 mb-3 text-xs">
                       {[...Array(5)].map((_, i) => (
                         <AiFillStar key={i} size={14} />
                       ))}
                       <span className="ml-1 text-gray-300">5.0</span>
                     </div>
-                    
+
                     <div className="flex gap-2 mb-3">
                       <button
                         onClick={() => openDetailModal(item)}
@@ -347,7 +348,7 @@ export default function LayananGuest() {
                   </div>
                 </div>
 
-                
+
 
                 {/* Description */}
                 <div className="mb-6">
