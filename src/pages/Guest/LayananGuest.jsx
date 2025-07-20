@@ -170,7 +170,8 @@ export default function LayananGuest() {
                         onClick={() => openDetailModal(item)}
                         className="text-gray-400 hover:text-emerald-400 transition-colors ml-2"
                       >
-                        <AiOutlineInfoCircle size={18} />
+                        <AiOutlineInfoCircle className="text-emerald-400 w-5 h-5" />
+
                       </button>
                     </div>
                     

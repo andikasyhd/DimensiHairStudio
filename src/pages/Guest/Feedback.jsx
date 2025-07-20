@@ -109,10 +109,11 @@ export default function Feedback() {
           <button
             type="button"
             onClick={() => navigate('/kontak')}
-            className="w-full mt-2 text-white border border-white hover:bg-white hover:text-black rounded-md py-2 transition duration-300"
+            className="w-full mt-2 text-white bg-white/10 border border-white hover:bg-white hover:text-black rounded-md py-2 transition duration-300"
           >
-            Kembali ke Beranda
+            Kembali 
           </button>
+
         </form>
       </div>
     </div>
